@@ -1,0 +1,142 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}	% Para caracteres en español
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{multirow,booktabs}
+\usepackage[table]{xcolor}
+\usepackage{fullpage}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{wrapfig}
+\usepackage{setspace}
+\usepackage{calc}
+\usepackage{multicol}
+\usepackage{cancel}
+\usepackage[retainorgcmds]{IEEEtrantools}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath}
+\newlength{\tabcont}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+\usepackage{empheq}
+\usepackage{framed}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\colorlet{shadecolor}{orange!15}
+\parindent 0in
+\parskip 12pt
+\geometry{margin=1in, headsep=0.25in}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{reg}{Rule}
+\newtheorem{exer}{Exercise}
+\newtheorem{note}{Note}
+
+\usepackage{tikz}
+\usetikzlibrary{trees}
+
+
+Solids vs liquids
+Spin interactions overview
+Chemical shift
+Direct dipole coupling
+J-coupling
+Quadrupole coupling
+
+
+
+
+\begin{document}
+% \setcounter{section}{8}
+\title{Chapter 9 Review Notes}
+
+\thispagestyle{empty}
+
+\begin{center}
+{\LARGE \bf Review notes}\\
+{\large CHEM 3013 HPO}\\
+\end{center}
+
+\tableofcontents
+
+
+\newpage
+\section{Liquids and solids}
+NMR in it's most simple form concerns nuclear spins and their interactions. Often these interactions vary with the orientation of the molecule to the main magnetic field (they are said to be anisotropic). 
+
+In solution NMR, molecules are dissolved in a solvent and undergo rotational diffusion. This means each molecule tumbles randomly, over time sampling all orientations uniformly. Molecules typically rotate on the order of 1 ns, which is much faster than most nuclear spin interactions take to evolve. This means that any orientation dependent interactions will only be observable as an average of all orinetations.
+
+In solid-state NMR, molecules are oriented statically with the main magnetic field. If the solid sample is a powder, it will contain all orientations uniformly within the population. Anisotropic interactions will thus be visible as a distribution within the spectrum.
+
+
+
+\section{Spin interactions}
+
+\tikzstyle{every node}=[draw=black,thick,anchor=west]
+\tikzstyle{solidsonly}=[draw=red,fill=red!30]
+\begin{tikzpicture}[%
+	grow via three points={one child at (0.5,-0.7) and
+	two children at (0.5,-0.7) and (0.5,-1.4)},
+	edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+	\node {Nuclear spin interactions}
+		child { node {Magnetic}	
+			child { node {Spin - Electrons}
+				child { node {Isotropic chemical shift}}
+				child { node [solidsonly] {Chemical shift anisotropy (CSA)}}
+			}
+			child [missing] {}
+			child [missing] {}
+			child { node {Spin - Spin}
+				child { node {J-coupling}}
+				child { node [solidsonly] {Direct dipole-dipole coupling}}
+			}
+		}
+		child [missing] {}
+		child [missing] {}
+		child [missing] {}
+		child [missing] {}
+		child [missing] {}
+		child [missing] {}
+		child { node {Electric}}{
+		child { node {Quadrupole coupling}}
+		};
+\end{tikzpicture}
+
+
+
+
+\section{A note on tensors and spherical}
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
