@@ -16,6 +16,8 @@
 \usepackage[retainorgcmds]{IEEEtrantools}
 \usepackage[margin=3cm]{geometry}
 \usepackage{amsmath}
+\usepackage{braket}
+\usepackage{hyperref}
 \newlength{\tabcont}
 \setlength{\parindent}{0.0in}
 \setlength{\parskip}{0.05in}
@@ -37,19 +39,9 @@
 \usetikzlibrary{trees}
 
 
-Solids vs liquids
-Spin interactions overview
-Chemical shift
-Direct dipole coupling
-J-coupling
-Quadrupole coupling
-
-
-
-
 \begin{document}
 % \setcounter{section}{8}
-\title{Chapter 9 Review Notes}
+\title{Chapter 1 Review Notes}
 
 \thispagestyle{empty}
 
@@ -60,18 +52,66 @@ Quadrupole coupling
 
 \tableofcontents
 
+%  19-00003638.
 
 \newpage
 \section{Liquids and solids}
-NMR in it's most simple form concerns nuclear spins and their interactions. Often these interactions vary with the orientation of the molecule to the main magnetic field (they are said to be anisotropic). 
+NMR in it's most simple form concerns nuclear spins and their interactions. Evolution of a spin system $\ket{\psi}$ evolves according to the shr\"odinger wave equation, where the hamiltonian $\hat H$ describes the interaction.
 
-In solution NMR, molecules are dissolved in a solvent and undergo rotational diffusion. This means each molecule tumbles randomly, over time sampling all orientations uniformly. Molecules typically rotate on the order of 1 ns, which is much faster than most nuclear spin interactions take to evolve. This means that any orientation dependent interactions will only be observable as an average of all orinetations.
+\begin{equation}
+	\label{eq_wave_equation}
+	i\hbar\frac{\partial\ket{\psi}}{\partial t}=\hat H\ket{\psi}
+\end{equation}
+
+Often these interactions vary with the orientation of the molecule to the main magnetic field (they are said to be anisotropic).
+
+\begin{shaded}
+		Anisotropic interactions vary with orientation.
+
+		Isotropic interactions are uniform with orientation.
+\end{shaded}
+
+In solution NMR, molecules are dissolved in a solvent and undergo rotational diffusion. This means each molecule tumbles randomly, over time sampling all orientations uniformly. Molecules typically rotate on a timescale of 1 ns, which is much faster than most nuclear spin interactions take to evolve. This means that any orientation dependent interactions will only be observable as an average of all orinetations.
 
 In solid-state NMR, molecules are oriented statically with the main magnetic field. If the solid sample is a powder, it will contain all orientations uniformly within the population. Anisotropic interactions will thus be visible as a distribution within the spectrum.
 
+\begin{shaded}
+	In solution state, anisotropic interactions are averaged by rotation diffusion.
+\end{shaded}
 
+\section{Tensors}
+For the purposes of this course, a tensor is just a transformation that takes a vector to some new vector. 
 
-\section{Spin interactions}
+If we apply a magnetic field vector $\vec B_0$ to a molecule, what is the resultant vector of the induced field $\vec B_\text{ind}$? A tensor $\sigma$ can describe this transformation.
+
+\begin{equation}
+	\vec B_\text{ind} = \sigma . \vec B_0
+\end{equation}
+
+Most spin interactions in NMR can be represented by a real symmetric $3\times 3$ matrix. The matrix is symmetric because it equals its transpose $\sigma=\sigma^T$, i.e. elements opposite the diagonal are equal. A theorem from linear algebra tells us that all real summetric matrices are diagonalisable by some rotation matrix $R$ as in equation \ref{eq:tensor_diag}. In this special orientation, the values along the diagonal are called \emph{eigenvalues}. The columns that form the rotation matrix $R$ are called the \emph{principle axes} of the tensor and are orthonormal. 
+
+\begin{align}
+	\sigma&=
+	\begin{bmatrix}
+		\sigma_{xx} & \sigma_{xy} & \sigma_{xz}\\
+		\sigma_{xy} & \sigma_{yy} & \sigma_{yz}\\
+		\sigma_{xz} & \sigma_{yz} & \sigma_{zz}\\
+	\end{bmatrix}\\
+	\label{eq:tensor_diag}
+	&=R
+	\begin{bmatrix}
+		\sigma_{xx} & 0 & 0\\
+		0 & \sigma_{yy} & 0\\
+		0 & 0 & \sigma_{zz}\\
+	\end{bmatrix}.R^{-1}
+\end{align}
+
+\begin{shaded}
+	A tensor is a vector transformation that can be represented by a matrix. This matrix has a diagonal form which is characterised by 3 eigenvalues and 3 principle axes.
+\end{shaded}
+
+\section{Spin interactions overview}
+Interactions shown in red are anisotropic and are not usually observable in solution NMR.
 
 \tikzstyle{every node}=[draw=black,thick,anchor=west]
 \tikzstyle{solidsonly}=[draw=red,fill=red!30]
@@ -99,14 +139,159 @@ In solid-state NMR, molecules are oriented statically with the main magnetic fie
 		child [missing] {}
 		child [missing] {}
 		child { node {Electric}}{
-		child { node {Quadrupole coupling}}
+		child { node [solidsonly] {Quadrupole coupling}}
 		};
 \end{tikzpicture}
 
+In these notes, interactions between spin operators $\hat{\vec L}$ or $\hat{\vec S}$ will be considered as well as with the external magnetic field vector $\vec B_0$. An operator is just a vector that acts on the spin system $\ket{\psi}$ to alter it in some way. In cartesian coordinates, this vector could look like this:
+
+\begin{equation}
+	\hat{\vec L}=
+	\begin{bmatrix}
+		\hat L_x \\
+		\hat L_y \\
+		\hat L_z
+	\end{bmatrix}
+\end{equation}
+
+From these operators we can construct Hamiltonians $\hat H$ to calculate an the evolution of spins for an NMR experiment using equation \ref{eq_wave_equation}.
+
+\section{Chemical shift}
+The chemical shift describes the indirect interaction of a nuclear spin with the main magnetic field $\vec B_0$ via the surrounding electrons. The Hamiltonian for the chemical shift is shown in equation \ref{eq:cs_hamiltonian} where $\hat{\vec L}$ is the spin system and $\mathbf{\sigma}$ is the chemical shift tensor.
+
+\begin{equation}
+	\label{eq:cs_hamiltonian}
+	\hat H_\text{CS} = \hat{\vec L} .\mathbf{\sigma}. \vec{B_0}
+\end{equation}
+
+Fundamentally, the spins experience an induced field $\vec B_\text{ind}$ which depends on the orientation of the chemical shift tensor $\mathbf{\sigma}$ with respect to the magnetic field $\vec B_0$
+
+\begin{align}
+	\vec B_\text{ind} &= \mathbf{\sigma}.\vec B_0\\
+	\begin{bmatrix}
+		\vec B^\text{ind}_x\\
+		\vec B^\text{ind}_y\\
+		\vec B^\text{ind}_z
+	\end{bmatrix}&=
+	\begin{bmatrix}
+		\sigma_{xx} & \sigma_{xy} & \sigma_{xz}\\
+		\sigma_{xy} & \sigma_{yy} & \sigma_{yz}\\
+		\sigma_{xz} & \sigma_{yz} & \sigma_{zz}\\
+	\end{bmatrix}.
+	\begin{bmatrix}
+		\vec B^0_x\\
+		\vec B^0_y\\
+		\vec B^0_z
+	\end{bmatrix}
+\end{align}
+
+The chemical shift tensor can be expressed in terms of its isotropic and anisotropic part. The isotrpic part is calulated from $\sigma$ using the trace operation $Tr$ which sums the diagonal elements.
+
+\begin{align}
+	\sigma_\text{iso}&= \frac{1}{3}Tr[\sigma] = \frac{1}{3}(\sigma_{xx} + \sigma_{yy} + \sigma_{zz})\\
+	\mathbf{\sigma}&=
+	\begin{bmatrix}
+		\sigma_{xx}-\sigma_\text{iso} & \sigma_{xy} & \sigma_{xz}\\
+		\sigma_{xy} & \sigma_{yy}-\sigma_\text{iso} & \sigma_{yz}\\
+		\sigma_{xz} & \sigma_{yz} & \sigma_{zz}-\sigma_\text{iso}\\
+	\end{bmatrix} +
+	\begin{bmatrix}
+		\sigma_\text{iso} & 0 & 0\\
+		0 & \sigma_\text{iso} & 0\\
+		0 & 0 & \sigma_\text{iso}\\
+	\end{bmatrix}\\
+	&= \text{CSA} + \sigma_\text{iso}
+	\begin{bmatrix}
+		1 & 0 & 0\\
+		0 & 1 & 0\\
+		0 & 0 & 1\\
+	\end{bmatrix}
+\end{align}
+
+In solution NMR, only the isotropic part of $\sigma$ is observable. This is the commonly referred to \emph{chemical shift} which could be 7.5 ppm for aromatic protons.
+
+\begin{shaded}
+	The chemical shift is anisotropic and depends on the orientation of the chemical shift tensor $\sigma$ with respect the the magnetic field vector $\vec B_0$. Only the isotropic part is observable in solution NMR.
+\end{shaded}
+
+\section{Direct dipole coupling}
+Direct dipole coupling is the interaction of two spins via their magnetic dipoles. The magnitude of the dipole coupling depends on the orientation of the internuclear vector with respect to the external magnetic field. 
+
+\begin{align}
+	b_{IS} &=-\frac{\mu_0}{4\pi}\frac{\gamma_I \gamma_S \hbar}{r^3} \\
+	\hat H_\text{DD}&=b_{IS}
+	\left
+		(\frac{3}{r^2} (\hat{\vec I}.\vec r)(\vec r.\hat{\vec S}) - \hat{\vec I}.\hat{\vec S}
+	\right)\\
+	&=b_{IS}\hat{\vec I}.\mathbf{A}.\hat{\vec S}\\
+	\mathbf{A}&=
+	\begin{bmatrix}
+		3x^2-r^2 & 3xy & 3xz\\
+		3xy & 3y^2-r^2 & 3yz\\
+		3xz & 3xy & 3z^2-r^2\\
+	\end{bmatrix}\\
+	\hat H_\text{DD}&=\frac{b_{IS}}{2}\left(3\cos^2{\theta_{IS}-1} \right)
+\end{align}
+
+The average dipole coupling over all orientations is zero. This is demonstrated equivalently for both equations below. The trace of the dipole coupling tensor $\mathbf{A}$ is zero and the integral over the angle $\theta$ is also zero. Note that the factor ${\color{red}(\cos{\theta})}$ is required to weight a uniform distribution over a sphere.
+
+\begin{align}
+	Tr[\mathbf{A}] &= 0\\
+	\int_0^{2\pi}(3\cos^2{\theta}-1){\color{red}(\cos{\theta})}d\theta &= 0
+\end{align}
+
+\section{J-coupling}
+J-coupling (also called indirect dipole-dipole coupling) is the interaction of two nuclear spins via electrons. This interaction is isotropic, and is sometimes called \emph{scalar}-coupling.
+
+\begin{align}
+	\hat H_J &= \hat{\vec L}.\mathbf{J_{LS}}.\hat{\vec S} \\ 
+	&=
+	\begin{bmatrix}
+		\hat L_x & \hat L_y & \hat L_z
+	\end{bmatrix}.
+	\begin{bmatrix}
+		J_{LS} & 0 & 0\\
+		0 & J_{LS} & 0\\
+		0 & 0 & J_{LS}\\
+	\end{bmatrix}.
+	\begin{bmatrix}
+		\hat S_x \\
+		\hat S_y \\
+		\hat S_z
+	\end{bmatrix}\\
+	&= J_{LS}(\hat{\vec L}.\hat{\vec S})
+\end{align}
+
+\begin{shaded}
+	J-coupling is an indirect and isotropic interaction between two spins, mediated by the surrounding electrons.
+\end{shaded}
 
 
 
-\section{A note on tensors and spherical}
+
+% Spin interactions overview
+% Chemical shift 
+% Direct dipole coupling
+% J-coupling
+% Quadrupole coupling
+% Spherical tensors and symmetric tensors
+% Chemical shift anisotropy
+% Direct Dipole coupling orientation dependence and integration
+% 
+%% NMR experiemnts in the solid state
+% Powder patters
+% Tensor components
+% Magic angle spinning
+% Spinning side-bands
+% Cross-polarisation
+% Recoupling experiments
+% 
+%% NMR of biosolids
+% Types of biosolids (microcrystals, sediments, lipids)
+% 1H detection and sensitivity
+% CP and recoupling experiments
+% 
+% 
 
 
 

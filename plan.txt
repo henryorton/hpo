@@ -1,0 +1,24 @@
+% 1:Spin interactions
+Solids vs liquids
+Spin interactions overview
+Chemical shift
+Direct dipole coupling
+J-coupling
+Quadrupole coupling
+Spherical tensors
+Chemical shift anisotropy
+Direct Dipole coupling orientation dependence
+
+% 2:NMR experiemnts in the solid state
+Powder patterns
+Tensor components
+Magic angle spinning
+Spinning side-bands
+Cross-polarisation
+Recoupling experiments
+
+% 3:NMR of biosolids
+Types of biosolids (microcrystals, sediments, lipids)
+1H detection and sensitivity
+CP and recoupling experiments
+
