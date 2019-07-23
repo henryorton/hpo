@@ -2,7 +2,7 @@
 Solids vs liquids
 Spin interactions overview
 Chemical shift
-Direct dipole coupling
+Direct dipole-dipole coupling
 J-coupling
 Quadrupole coupling
 Spherical tensors

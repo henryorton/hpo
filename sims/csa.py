@@ -25,14 +25,13 @@ csa_tensor = np.diag([-1.0,-3.0,4.0])
 
 
 dist=[]
-for i in range(100):
+for i in range(10000):
 	vec = random_three_vector()
 
 	# vec = np.random.uniform(size=3)*2.-1.
 	# vec /= np.linalg.norm(vec)
 	B_ind = csa_tensor.dot(vec)
 	zeeman = B_ind.dot(B_ind)
-	print(zeeman)
 	dist.append(zeeman)
 
 
